@@ -3,39 +3,9 @@
 	"name": "storeganise-ttlock-worker",
 	"main": "src/index.ts",
 	"compatibility_date": "2026-06-16",
-	"observability": { "enabled": true },
-	"upload_source_maps": true,
 	"compatibility_flags": ["nodejs_compat"],
-
-	// Static Admin-Frontend
 	"assets": {
 		"directory": "./public/",
 		"binding": "ASSETS"
-	},
-
-	// D1-Datenbank für Fehler-Logs
-	// Erstellen mit: npx wrangler d1 create ttlock-logs
-	// Dann database_id unten eintragen
-	"d1_databases": [
-		{
-			"binding": "DB",
-			"database_name": "ttlock-logs",
-			"database_id": "b3a4a038-e72c-49a6-aeca-c5bf466195d6"
-		}
-	],
-
-	// Cron für automatisches Log-Cleanup (täglich 3 Uhr)
-	"triggers": {
-		"crons": ["0 3 * * *"]
 	}
-
-	// Secrets – werden per CLI gesetzt, NICHT hier eintragen:
-	//
-	// npx wrangler secret put TTLOCK_CLIENT_ID
-	// npx wrangler secret put TTLOCK_CLIENT_SECRET
-	// npx wrangler secret put TTLOCK_ACCESS_TOKEN
-	// npx wrangler secret put TTLOCK_REFRESH_TOKEN
-	// npx wrangler secret put STOREGANISE_API_KEY
-	// npx wrangler secret put STOREGANISE_WEBHOOK_SECRET
-	// npx wrangler secret put ADMIN_SECRET
 }
