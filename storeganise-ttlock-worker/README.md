@@ -1,6 +1,6 @@
 # TTLock ↔ Storeganise Worker
 
-## Setup-Reihenfolge
+## Setup-Reihenfolge!
 
 ### 1. D1-Datenbank erstellen
 
