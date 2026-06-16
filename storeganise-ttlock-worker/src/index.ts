@@ -1,6 +1,7 @@
 export interface Env {
 	ASSETS: Fetcher;
 	DB: D1Database;
+	ADMIN_SECRET: string;
 }
 
 export default {
@@ -9,9 +10,21 @@ export default {
 
 		// Health-Check
 		if (url.pathname === "/health") {
-			return new Response(JSON.stringify({ ok: true }), {
-				headers: { "Content-Type": "application/json" },
-			});
+			return json({ ok: true });
+		}
+
+		// Admin-Endpunkte – brauchen X-Admin-Secret Header
+		if (url.pathname.startsWith("/admin/")) {
+			if (request.headers.get("X-Admin-Secret") !== env.ADMIN_SECRET) {
+				return json({ error: "Unauthorized" }, 401);
+			}
+
+			if (url.pathname === "/admin/logs") {
+				const { results } = await env.DB
+					.prepare("SELECT * FROM error_logs ORDER BY createdAt DESC LIMIT 50")
+					.all();
+				return json({ logs: results });
+			}
 		}
 
 		// Alles andere → Frontend
@@ -19,3 +32,9 @@ export default {
 	},
 } satisfies ExportedHandler<Env>;
 
+function json(data: unknown, status = 200): Response {
+	return new Response(JSON.stringify(data), {
+		status,
+		headers: { "Content-Type": "application/json" },
+	});
+}
