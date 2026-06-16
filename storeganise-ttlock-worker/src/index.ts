@@ -1,5 +1,6 @@
 export interface Env {
 	ASSETS: Fetcher;
+	DB: D1Database;
 }
 
 export default {
@@ -17,3 +18,4 @@ export default {
 		return env.ASSETS.fetch(request);
 	},
 } satisfies ExportedHandler<Env>;
+

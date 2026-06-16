@@ -7,5 +7,12 @@
 	"assets": {
 		"directory": "./public/",
 		"binding": "ASSETS"
-	}
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "ttlock-logs",
+			"database_id": "b3a4a038-e72c-49a6-aeca-c5bf466195d6"
+		}
+	]
 }
