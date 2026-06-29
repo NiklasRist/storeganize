@@ -9,6 +9,18 @@ export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const url = new URL(request.url);
 
+		// Temporär zum Testen – danach wieder raus
+		if (url.pathname === "/admin/test-storeganise") {
+			if (request.headers.get("X-Admin-Secret") !== env.ADMIN_SECRET) {
+				return json({ error: "Unauthorized" }, 401);
+			}
+			const res = await fetch("https://api.storeganise.com/api/v1/admin/units", {
+				headers: { "Authorization": `Bearer ${env.STOREGANISE_API_KEY}` },
+			});
+			const data = await res.json();
+			return json({ status: res.status, data });
+		}
+
 		// Health-Check
 		if (url.pathname === "/health") {
 			return json({ ok: true });
