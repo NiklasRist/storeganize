@@ -17,8 +17,9 @@ export default {
 					headers: { "Authorization": `ApiKey ${env.STOREGANISE_API_KEY}` },
 				}
 			);
-			const data = await res.json();
-			return json({ status: res.status, data });
+			const text = await res.text(); // raw text, kein JSON parsing
+			return new Response(text, { status: res.status, headers: { "Content-Type": "text/plain" } });
+
 		}
 
 		// Health-Check
