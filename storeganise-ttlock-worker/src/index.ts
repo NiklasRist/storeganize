@@ -10,7 +10,7 @@ export default {
 		const url = new URL(request.url);
 
 		// Temporär zum Testen – danach wieder raus
-		if (url.pathname === "/admin/test-storeganise") {
+		if (url.pathname === "/test-storeganise") {
 			if (request.headers.get("X-Admin-Secret") !== env.ADMIN_SECRET) {
 				return json({ error: "Unauthorized" }, 401);
 			}
