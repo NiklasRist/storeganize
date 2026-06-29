@@ -15,7 +15,7 @@ export default {
 				return json({ error: "Unauthorized" }, 401);
 			}
 			const res = await fetch(
-				"https://lagerraum24-online.storeganise.com/api/v1/admin/units",
+				"https://lagerraum24-online.storeganise.com/v1/admin/units/694bb45e84c3989a2f33a5a8?include=customFields",
 				{
 					headers: { "Authorization": `ApiKey ${env.STOREGANISE_API_KEY}` },
 				}
