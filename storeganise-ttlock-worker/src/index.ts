@@ -10,10 +10,7 @@ export default {
 		const url = new URL(request.url);
 
 		// Temporär zum Testen – danach wieder raus
-		if (url.pathname === "/admin/test-storeganise") {
-			if (request.headers.get("X-Admin-Secret") !== env.ADMIN_SECRET) {
-				return json({ error: "Unauthorized" }, 401);
-			}
+		if (url.pathname === "/test-storeganise") {
 			const res = await fetch(
 				"https://lagerraum24-online.storeganise.com/v1/admin/units/694bb45e84c3989a2f33a5a8?include=customFields",
 				{
