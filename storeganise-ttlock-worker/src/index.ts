@@ -12,7 +12,7 @@ export default {
 		// Temporär zum Testen – danach wieder raus
 		if (url.pathname === "/test-storeganise") {
 			const res = await fetch(
-				"https://lagerraum24-online.storeganise.com/v1/admin/units/694bb45e84c3989a2f33a5a8?include=customFields",
+				"https://lagerraum24.storeganise.com/v1/admin/units/694bb45e84c3989a2f33a5a8?include=customFields",
 				{
 					headers: { "Authorization": `ApiKey ${env.STOREGANISE_API_KEY}` },
 				}
