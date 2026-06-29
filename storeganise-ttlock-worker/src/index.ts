@@ -10,13 +10,16 @@ export default {
 		const url = new URL(request.url);
 
 		// Temporär zum Testen – danach wieder raus
-		if (url.pathname === "/test-storeganise") {
+		if (url.pathname === "/admin/test-storeganise") {
 			if (request.headers.get("X-Admin-Secret") !== env.ADMIN_SECRET) {
 				return json({ error: "Unauthorized" }, 401);
 			}
-			const res = await fetch("https://api.storeganise.com/api/v1/admin/units", {
-				headers: { "Authorization": `Bearer ${env.STOREGANISE_API_KEY}` },
-			});
+			const res = await fetch(
+				"https://lagerraum24-online.storeganise.com/api/v1/admin/units/694bb45e84c3989a2f33a5a8?include=customFields",
+				{
+					headers: { "Authorization": `ApiKey ${env.STOREGANISE_API_KEY}` },
+				}
+			);
 			const data = await res.json();
 			return json({ status: res.status, data });
 		}
